@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { PaystubTemplate } from "@/components/paystub/PaystubTemplate";
@@ -115,7 +114,20 @@ const Creator = () => {
                       Select a template for your paystub
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 gap-6">
+                  <div className="flex flex-wrap gap-2 justify-center mb-6">
+                    {["All", "Featured", "Corporate", "All Purpose", "Small Business"].map(
+                      (filter) => (
+                        <Button
+                          key={filter}
+                          variant={filter === "Featured" ? "default" : "outline"}
+                          className="rounded-full"
+                        >
+                          {filter}
+                        </Button>
+                      )
+                    )}
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {templates.map((template) => (
                       <PaystubTemplate
                         key={template.id}

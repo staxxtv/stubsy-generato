@@ -1,4 +1,3 @@
-
 interface TaxRates {
   [key: string]: {
     incomeTax: number;
@@ -13,6 +12,9 @@ interface TaxRates {
 }
 
 const TAX_RATES: TaxRates = {
+  AL: { incomeTax: 0.05, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0.02], married: [0.018], marriedSeparate: [0.02] } },
+  AK: { incomeTax: 0, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0], married: [0], marriedSeparate: [0] } },
+  AZ: { incomeTax: 0.049, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0.022], married: [0.019], marriedSeparate: [0.022] } },
   CA: {
     incomeTax: 0.07,
     medicare: 0.0145,
@@ -23,6 +25,8 @@ const TAX_RATES: TaxRates = {
       marriedSeparate: [0.011, 0.022, 0.044, 0.066, 0.088],
     },
   },
+  CO: { incomeTax: 0.0463, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0.02], married: [0.018], marriedSeparate: [0.02] } },
+  CT: { incomeTax: 0.0699, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0.03], married: [0.027], marriedSeparate: [0.03] } },
   NY: {
     incomeTax: 0.065,
     medicare: 0.0145,
@@ -33,7 +37,7 @@ const TAX_RATES: TaxRates = {
       marriedSeparate: [0.014, 0.028, 0.056, 0.084],
     },
   },
-  // Add more states as needed
+  WY: { incomeTax: 0, medicare: 0.0145, socialSecurity: 0.062, stateWithholding: { single: [0], married: [0], marriedSeparate: [0] } }
 };
 
 export const calculateTaxes = (
