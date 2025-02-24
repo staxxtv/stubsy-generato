@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { PaystubTemplate } from "@/components/paystub/PaystubTemplate";
@@ -67,7 +66,6 @@ const Creator = () => {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24">
         <div className="space-y-8">
-          {/* Progress Steps */}
           <nav aria-label="Progress">
             <ol className="flex items-center justify-center">
               {[
@@ -105,45 +103,53 @@ const Creator = () => {
             </ol>
           </nav>
 
-          {/* Step Content */}
-          <div className="max-w-3xl mx-auto">
-            {step === 1 && (
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h2 className="text-2xl font-bold">Choose a Template</h2>
-                  <p className="text-gray-600 mt-2">
-                    Select a template for your paystub
-                  </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              {step === 1 && (
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <h2 className="text-2xl font-bold">Choose a Template</h2>
+                    <p className="text-gray-600 mt-2">
+                      Select a template for your paystub
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 gap-6">
+                    {templates.map((template) => (
+                      <PaystubTemplate
+                        key={template.id}
+                        {...template}
+                        selected={selectedTemplate === template.id}
+                        onSelect={handleTemplateSelect}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex justify-end">
+                    <Button onClick={handleTemplateSubmit}>Next</Button>
+                  </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {templates.map((template) => (
-                    <PaystubTemplate
-                      key={template.id}
-                      {...template}
-                      selected={selectedTemplate === template.id}
-                      onSelect={handleTemplateSelect}
-                    />
-                  ))}
-                </div>
-                <div className="flex justify-end">
-                  <Button onClick={handleTemplateSubmit}>Next</Button>
-                </div>
-              </div>
-            )}
+              )}
 
-            {step === 2 && (
-              <EmployeeForm
-                onSubmit={handleEmployeeSubmit}
-                onBack={() => setStep(1)}
-              />
-            )}
+              {step === 2 && (
+                <EmployeeForm
+                  onSubmit={handleEmployeeSubmit}
+                  onBack={() => setStep(1)}
+                />
+              )}
 
-            {step === 3 && (
-              <EarningsForm
-                onSubmit={handleEarningsSubmit}
-                onBack={() => setStep(2)}
+              {step === 3 && (
+                <EarningsForm
+                  onSubmit={handleEarningsSubmit}
+                  onBack={() => setStep(2)}
+                />
+              )}
+            </div>
+
+            <div className="hidden md:block sticky top-24">
+              <PaystubPreview
+                employeeData={employeeData}
+                earningsData={earningsData}
               />
-            )}
+            </div>
           </div>
         </div>
       </div>
