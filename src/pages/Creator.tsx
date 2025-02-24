@@ -1,8 +1,10 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { PaystubTemplate } from "@/components/paystub/PaystubTemplate";
 import { EmployeeForm, EmployeeFormData } from "@/components/paystub/EmployeeForm";
 import { EarningsForm, EarningsFormData } from "@/components/paystub/EarningsForm";
+import { PaystubPreview } from "@/components/paystub/PaystubPreview";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
