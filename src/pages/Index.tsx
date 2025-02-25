@@ -155,14 +155,6 @@ const Index = () => {
                 Refund policy
               </Link>
             </div>
-
-            <div className="flex items-center gap-4">
-              <img 
-                src="/lovable-uploads/1b4258fa-a104-41a4-a053-b611eee86c30.png" 
-                alt="Security and Payment Methods" 
-                className="h-8 object-contain"
-              />
-            </div>
           </div>
         </div>
       </footer>
