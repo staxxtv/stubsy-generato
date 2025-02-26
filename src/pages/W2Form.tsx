@@ -29,15 +29,12 @@ const W2Form = () => {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold">W2 Form Generator</h1>
-              <p className="mt-2 text-gray-600">
-                Fill out the information below to generate your W2 form
-              </p>
+              <p className="mt-2 text-gray-600">Fill out the information below to generate your W2 form</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <Card className="p-6 space-y-6">
                 <h2 className="font-semibold text-lg">Employee & Employer Information</h2>
-                
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="employeeSsn">Social Security Number</Label>
@@ -47,29 +44,51 @@ const W2Form = () => {
                     <Label htmlFor="employerEin">Employer EIN</Label>
                     <Input id="employerEin" {...register("employerEin")} placeholder="XX-XXXXXXX" />
                   </div>
-
-                  <h3 className="font-semibold">Employer Information</h3>
                   <div>
                     <Label htmlFor="employerName">Employer Name</Label>
-                    <Input id="employerName" {...register("employerName")} placeholder="Company Name" />
+                    <Input id="employerName" {...register("employerName")} placeholder="Employer Name" />
                   </div>
                   <div>
                     <Label htmlFor="employerStreet">Street Address</Label>
-                    <Input id="employerStreet" {...register("employerStreet")} placeholder="123 Main St" />
+                    <Input id="employerStreet" {...register("employerStreet")} placeholder="Street Address" />
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <div>
                       <Label htmlFor="employerCity">City</Label>
-                      <Input id="employerCity" {...register("employerCity")} />
+                      <Input id="employerCity" {...register("employerCity")} placeholder="City" />
                     </div>
                     <div>
                       <Label htmlFor="employerState">State</Label>
-                      <Input id="employerState" {...register("employerState")} />
+                      <Input id="employerState" {...register("employerState")} placeholder="State" />
                     </div>
                     <div>
                       <Label htmlFor="employerZip">ZIP Code</Label>
-                      <Input id="employerZip" {...register("employerZip")} />
+                      <Input id="employerZip" {...register("employerZip")} placeholder="ZIP Code" />
                     </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="employeeFirstName">First Name</Label>
+                      <Input id="employeeFirstName" {...register("employeeFirstName")} />
+                    </div>
+                    <div>
+                      <Label htmlFor="employeeLastName">Last Name</Label>
+                      <Input id="employeeLastName" {...register("employeeLastName")} />
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 space-y-6">
+                <h2 className="font-semibold text-lg">Wages & Taxes</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="wagesTips">Wages and Tips (Box 1)</Label>
+                    <Input id="wagesTips" {...register("wagesTips")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label htmlFor="federalTax">Federal Tax Withheld (Box 2)</Label>
+                    <Input id="federalTax" {...register("federalTax")} type="number" step="0.01" />
                   </div>
                 </div>
               </Card>
@@ -84,7 +103,7 @@ const W2Form = () => {
           <div className="hidden md:block sticky top-24 h-fit">
             <Card className="p-6">
               <h2 className="font-semibold text-lg mb-4">Preview</h2>
-              <W2Preview data={formData} realistic={true} />
+              <W2Preview data={formData} />
             </Card>
           </div>
         </div>
