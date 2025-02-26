@@ -7,6 +7,8 @@ interface PaystubTemplateProps {
   id: string;
   name: string;
   preview: string;
+  description: string;
+  category: string;
   selected: boolean;
   onSelect: (id: string) => void;
 }
@@ -15,6 +17,8 @@ export const PaystubTemplate = ({
   id,
   name,
   preview,
+  description,
+  category,
   selected,
   onSelect,
 }: PaystubTemplateProps) => {
@@ -35,6 +39,12 @@ export const PaystubTemplate = ({
       </div>
       <div className="p-4">
         <h3 className="font-medium">{name}</h3>
+        <p className="text-sm text-gray-500 mt-1">{description}</p>
+        <div className="mt-2">
+          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+            {category}
+          </span>
+        </div>
       </div>
       {selected && (
         <div className="absolute right-2 top-2 h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center">

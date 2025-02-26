@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { PaystubTemplate } from "@/components/paystub/PaystubTemplate";
@@ -9,20 +10,47 @@ import { useToast } from "@/hooks/use-toast";
 
 const templates = [
   {
-    id: "modern",
-    name: "Modern Template",
+    id: "modern-blue",
+    name: "Modern Blue",
     preview: "/placeholder.svg",
+    description: "Clean and professional design with blue accents",
+    category: "Featured"
   },
   {
-    id: "classic",
-    name: "Classic Template",
+    id: "minimal-dark",
+    name: "Minimal Dark",
     preview: "/placeholder.svg",
+    description: "Sleek dark theme with white text",
+    category: "Modern"
   },
   {
-    id: "professional",
-    name: "Professional Template",
+    id: "corporate-pro",
+    name: "Corporate Pro",
     preview: "/placeholder.svg",
+    description: "Traditional corporate style with modern elements",
+    category: "Corporate"
   },
+  {
+    id: "tech-startup",
+    name: "Tech Startup",
+    preview: "/placeholder.svg",
+    description: "Modern design for tech companies",
+    category: "Featured"
+  },
+  {
+    id: "gradient-modern",
+    name: "Gradient Modern",
+    preview: "/placeholder.svg",
+    description: "Contemporary design with gradient accents",
+    category: "Modern"
+  },
+  {
+    id: "classic-plus",
+    name: "Classic Plus",
+    preview: "/placeholder.svg",
+    description: "Enhanced classic design for traditional businesses",
+    category: "Corporate"
+  }
 ];
 
 const Creator = () => {
@@ -111,11 +139,11 @@ const Creator = () => {
                   <div className="text-center">
                     <h2 className="text-2xl font-bold">Choose a Template</h2>
                     <p className="text-gray-600 mt-2">
-                      Select a template for your paystub
+                      Select a professional template for your paystub
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center mb-6">
-                    {["All", "Featured", "Corporate", "All Purpose", "Small Business"].map(
+                    {["All", "Featured", "Modern", "Corporate"].map(
                       (filter) => (
                         <Button
                           key={filter}
