@@ -108,45 +108,41 @@ const Index = () => {
 </section>
 
 
-        {/* Features Section */}
-  <section className="py-24">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl font-bold">Why Choose Bolt Stubs?</h2>
-        <p className="mt-4 text-lg text-gray-600">
-          The fastest and most reliable way to generate professional pay stubs
-        </p>
-      </div>
-      <div className="grid md:grid-cols-3 gap-8 text-center">
-        {[
-          {
-            title: "Instant Generation",
-            description:
-              "Create professional paystubs in seconds with our easy-to-use interface",
-            icon: <LightningBolt size={40} className="text-primary mx-auto mb-4" />,
-          },
-          {
-            title: "100% Accurate",
-            description:
-              "Automatic tax calculations based on the latest rates and regulations",
-            icon: <CheckCircle size={40} className="text-primary mx-auto mb-4" />,
-          },
-          {
-            title: "Multiple Formats",
-            description:
-              "Download your documents in multiple formats including PDF and JPG",
-            icon: <FileText size={40} className="text-primary mx-auto mb-4" />,
-          },
-        ].map((feature, index) => (
-          <div key={index} className="p-6">
-            {feature.icon} {/* Displays the icon */}
-            <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-            <p className="text-gray-600">{feature.description}</p>
+      {/* Features Section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold">Why Choose Bolt Stubs?</h2>
+            <p className="mt-4 text-lg text-gray-600">
+              The fastest and most reliable way to generate professional pay stubs
+            </p>
           </div>
-        ))}
-      </div>
-    </div>
-  </section>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            {[
+              {
+                title: "Instant Generation",
+                description:
+                  "Create professional paystubs in seconds with our easy-to-use interface",
+              },
+              {
+                title: "100% Accurate",
+                description:
+                  "Automatic tax calculations based on the latest rates and regulations",
+              },
+              {
+                title: "Multiple Formats",
+                description:
+                  "Download your documents in multiple formats including PDF and JPG",
+              },
+            ].map((feature, index) => (
+              <div key={index} className="p-6">
+                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="bg-primary py-20">
