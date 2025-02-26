@@ -9,7 +9,7 @@ const tiers = [
     price: "Free",
     description: "Perfect for occasional use",
     features: [
-      "5 paystubs per month",
+      "3 paystubs per month",
       "Basic templates",
       "Download as PDF",
       "Standard calculations",
