@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { W2FormData } from "@/types/w2";
@@ -25,7 +26,6 @@ const W2Form = () => {
     <div className="min-h-screen pt-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Form Section */}
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold">W2 Form Generator</h1>
@@ -37,43 +37,43 @@ const W2Form = () => {
                 <h2 className="font-semibold text-lg">Employee & Employer Information</h2>
                 <div className="space-y-4">
                   <div>
-                    <Label htmlFor="employeeSsn">Social Security Number</Label>
+                    <Label htmlFor="employeeSsn">a. Employee's Social Security Number</Label>
                     <Input id="employeeSsn" {...register("employeeSsn")} placeholder="XXX-XX-XXXX" />
                   </div>
+
                   <div>
-                    <Label htmlFor="employerEin">Employer EIN</Label>
+                    <Label htmlFor="employerEin">b. Employer Identification Number (EIN)</Label>
                     <Input id="employerEin" {...register("employerEin")} placeholder="XX-XXXXXXX" />
                   </div>
+
+                  <div className="space-y-4">
+                    <Label>c. Employer's Information</Label>
+                    <div className="space-y-2">
+                      <Input {...register("employerName")} placeholder="Employer Name" />
+                      <Input {...register("employerStreet")} placeholder="Street Address" />
+                      <div className="grid grid-cols-3 gap-2">
+                        <Input {...register("employerCity")} placeholder="City" />
+                        <Input {...register("employerState")} placeholder="State" />
+                        <Input {...register("employerZip")} placeholder="ZIP" />
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
-                    <Label htmlFor="employerName">Employer Name</Label>
-                    <Input id="employerName" {...register("employerName")} placeholder="Employer Name" />
-                  </div>
-                  <div>
-                    <Label htmlFor="employerStreet">Street Address</Label>
-                    <Input id="employerStreet" {...register("employerStreet")} placeholder="Street Address" />
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <Label htmlFor="employerCity">City</Label>
-                      <Input id="employerCity" {...register("employerCity")} placeholder="City" />
-                    </div>
-                    <div>
-                      <Label htmlFor="employerState">State</Label>
-                      <Input id="employerState" {...register("employerState")} placeholder="State" />
-                    </div>
-                    <div>
-                      <Label htmlFor="employerZip">ZIP Code</Label>
-                      <Input id="employerZip" {...register("employerZip")} placeholder="ZIP Code" />
+                    <Label htmlFor="employeeFirstName">e. Employee Name</Label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <Input {...register("employeeFirstName")} placeholder="First Name" />
+                      <Input {...register("employeeLastName")} placeholder="Last Name" />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="employeeFirstName">First Name</Label>
-                      <Input id="employeeFirstName" {...register("employeeFirstName")} />
-                    </div>
-                    <div>
-                      <Label htmlFor="employeeLastName">Last Name</Label>
-                      <Input id="employeeLastName" {...register("employeeLastName")} />
+
+                  <div className="space-y-2">
+                    <Label htmlFor="employeeAddress">f. Employee Address</Label>
+                    <Input {...register("employeeStreet")} placeholder="Street Address" />
+                    <div className="grid grid-cols-3 gap-2">
+                      <Input {...register("employeeCity")} placeholder="City" />
+                      <Input {...register("employeeState")} placeholder="State" />
+                      <Input {...register("employeeZip")} placeholder="ZIP" />
                     </div>
                   </div>
                 </div>
@@ -83,12 +83,98 @@ const W2Form = () => {
                 <h2 className="font-semibold text-lg">Wages & Taxes</h2>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="wagesTips">Wages and Tips (Box 1)</Label>
-                    <Input id="wagesTips" {...register("wagesTips")} type="number" step="0.01" />
+                    <Label>1. Wages, tips, other comp.</Label>
+                    <Input {...register("wagesTips")} type="number" step="0.01" />
                   </div>
                   <div>
-                    <Label htmlFor="federalTax">Federal Tax Withheld (Box 2)</Label>
-                    <Input id="federalTax" {...register("federalTax")} type="number" step="0.01" />
+                    <Label>2. Federal income tax withheld</Label>
+                    <Input {...register("federalTax")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>3. Social security wages</Label>
+                    <Input {...register("socialSecurityWages")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>4. Social security tax withheld</Label>
+                    <Input {...register("socialSecurityTax")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>5. Medicare wages and tips</Label>
+                    <Input {...register("medicareWages")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>6. Medicare tax withheld</Label>
+                    <Input {...register("medicareTax")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>7. Social security tips</Label>
+                    <Input {...register("socialSecurityTips")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>8. Allocated tips</Label>
+                    <Input {...register("allocatedTips")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>10. Dependent care benefits</Label>
+                    <Input {...register("dependentCare")} type="number" step="0.01" />
+                  </div>
+                  <div>
+                    <Label>11. Nonqualified plans</Label>
+                    <Input {...register("nonqualifiedPlans")} type="number" step="0.01" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Box 13</Label>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.statutoryEmployee")} id="statutory" />
+                      <Label htmlFor="statutory">Statutory Employee</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.retirementPlan")} id="retirement" />
+                      <Label htmlFor="retirement">Retirement Plan</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.thirdPartySickPay")} id="sickpay" />
+                      <Label htmlFor="sickpay">Third-party Sick Pay</Label>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 space-y-6">
+                <h2 className="font-semibold text-lg">State & Local Information</h2>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>15. State & Employer's state ID</Label>
+                      <Input {...register("stateId")} />
+                    </div>
+                    <div>
+                      <Label>16. State wages, tips, etc.</Label>
+                      <Input {...register("stateWages")} type="number" step="0.01" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>17. State income tax</Label>
+                      <Input {...register("stateTax")} type="number" step="0.01" />
+                    </div>
+                    <div>
+                      <Label>18. Local wages, tips, etc.</Label>
+                      <Input {...register("localWages")} type="number" step="0.01" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>19. Local income tax</Label>
+                      <Input {...register("localTax")} type="number" step="0.01" />
+                    </div>
+                    <div>
+                      <Label>20. Locality name</Label>
+                      <Input {...register("locality")} />
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -99,7 +185,6 @@ const W2Form = () => {
             </form>
           </div>
 
-          {/* Preview Section */}
           <div className="hidden md:block sticky top-24 h-fit">
             <Card className="p-6">
               <h2 className="font-semibold text-lg mb-4">Preview</h2>

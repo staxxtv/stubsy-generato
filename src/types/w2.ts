@@ -3,11 +3,18 @@ export interface W2FormData {
   // Employee & Employer Info
   employeeSsn: string;
   employerEin: string;
-  employerInfo: string;
+  employerName: string;
+  employerStreet: string;
+  employerCity: string;
+  employerState: string;
+  employerZip: string;
   controlNumber: string;
   employeeFirstName: string;
   employeeLastName: string;
-  employeeAddress: string;
+  employeeStreet: string;
+  employeeCity: string;
+  employeeState: string;
+  employeeZip: string;
   // Wage & Tax Information
   wagesTips: string;
   federalTax: string;
