@@ -48,38 +48,65 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Trusted by Thousands
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="text-primary"
-                      size={20}
-                      fill="#10B981"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">{review.text}</p>
-                <div>
-                  <p className="font-medium">{review.author}</p>
-                  <p className="text-sm text-gray-500">{review.role}</p>
-                </div>
-              </div>
+{/* Reviews Section */}
+<section className="py-24 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-center mb-12">
+      Trusted by Thousands
+    </h2>
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          text: "This site has been an absolute game-changer for me. Highly recommend!",
+          author: "James Carter",
+          role: "Marketing Manager",
+          image: "https://randomuser.me/api/portraits/men/32.jpg",
+        },
+        {
+          text: "Super easy to use and great customer service. I'm impressed!",
+          author: "Sarah Lewis",
+          role: "Freelancer",
+          image: "https://randomuser.me/api/portraits/women/44.jpg",
+        },
+        {
+          text: "I love how seamless the process is. Will definitely use again!",
+          author: "Michael Chen",
+          role: "Software Engineer",
+          image: "https://randomuser.me/api/portraits/men/56.jpg",
+        },
+      ].map((review, index) => (
+        <div
+          key={index}
+          className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+        >
+          <div className="flex mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="text-primary"
+                size={20}
+                fill="#10B981"
+              />
             ))}
           </div>
+          <p className="text-gray-600 mb-4">{review.text}</p>
+          <div className="flex items-center gap-4">
+            <img 
+              src={review.image} 
+              alt={review.author} 
+              className="w-12 h-12 rounded-full object-cover"
+            />
+            <div>
+              <p className="font-medium">{review.author}</p>
+              <p className="text-sm text-gray-500">{review.role}</p>
+            </div>
+          </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Features Section */}
       <section className="py-24">
