@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { W2FormData } from "@/types/w2";
@@ -15,6 +16,7 @@ const W2Form = () => {
   const formData = watch();
 
   const onSubmit = (data: W2FormData) => {
+    // Here you would handle PDF generation
     toast({
       title: "W2 Form Generated",
       description: "Your W2 form has been generated and is ready for download.",
@@ -29,51 +31,57 @@ const W2Form = () => {
           <div className="space-y-6">
             <div>
               <h1 className="text-3xl font-bold">W2 Form Generator</h1>
-              <p className="mt-2 text-gray-600">Fill out the information below to generate your W2 form</p>
+              <p className="mt-2 text-gray-600">
+                Fill out the information below to generate your W2 form
+              </p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <Card className="p-6 space-y-6">
                 <h2 className="font-semibold text-lg">Employee & Employer Information</h2>
+                
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="employeeSsn">Social Security Number</Label>
-                    <Input id="employeeSsn" {...register("employeeSsn")} placeholder="XXX-XX-XXXX" />
+                    <Input
+                      id="employeeSsn"
+                      {...register("employeeSsn")}
+                      placeholder="XXX-XX-XXXX"
+                    />
                   </div>
+
                   <div>
                     <Label htmlFor="employerEin">Employer EIN</Label>
-                    <Input id="employerEin" {...register("employerEin")} placeholder="XX-XXXXXXX" />
+                    <Input
+                      id="employerEin"
+                      {...register("employerEin")}
+                      placeholder="XX-XXXXXXX"
+                    />
                   </div>
+
                   <div>
-                    <Label htmlFor="employerName">Employer Name</Label>
-                    <Input id="employerName" {...register("employerName")} placeholder="Employer Name" />
+                    <Label htmlFor="employerInfo">Employer Information</Label>
+                    <Input
+                      id="employerInfo"
+                      {...register("employerInfo")}
+                      placeholder="Name and Address"
+                    />
                   </div>
-                  <div>
-                    <Label htmlFor="employerStreet">Street Address</Label>
-                    <Input id="employerStreet" {...register("employerStreet")} placeholder="Street Address" />
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div>
-                      <Label htmlFor="employerCity">City</Label>
-                      <Input id="employerCity" {...register("employerCity")} placeholder="City" />
-                    </div>
-                    <div>
-                      <Label htmlFor="employerState">State</Label>
-                      <Input id="employerState" {...register("employerState")} placeholder="State" />
-                    </div>
-                    <div>
-                      <Label htmlFor="employerZip">ZIP Code</Label>
-                      <Input id="employerZip" {...register("employerZip")} placeholder="ZIP Code" />
-                    </div>
-                  </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="employeeFirstName">First Name</Label>
-                      <Input id="employeeFirstName" {...register("employeeFirstName")} />
+                      <Input
+                        id="employeeFirstName"
+                        {...register("employeeFirstName")}
+                      />
                     </div>
                     <div>
                       <Label htmlFor="employeeLastName">Last Name</Label>
-                      <Input id="employeeLastName" {...register("employeeLastName")} />
+                      <Input
+                        id="employeeLastName"
+                        {...register("employeeLastName")}
+                      />
                     </div>
                   </div>
                 </div>
@@ -81,14 +89,64 @@ const W2Form = () => {
 
               <Card className="p-6 space-y-6">
                 <h2 className="font-semibold text-lg">Wages & Taxes</h2>
+                
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="wagesTips">Wages and Tips (Box 1)</Label>
-                    <Input id="wagesTips" {...register("wagesTips")} type="number" step="0.01" />
+                    <Input
+                      id="wagesTips"
+                      {...register("wagesTips")}
+                      type="number"
+                      step="0.01"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="federalTax">Federal Tax Withheld (Box 2)</Label>
-                    <Input id="federalTax" {...register("federalTax")} type="number" step="0.01" />
+                    <Input
+                      id="federalTax"
+                      {...register("federalTax")}
+                      type="number"
+                      step="0.01"
+                    />
+                  </div>
+                  {/* Add more wage & tax fields */}
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Box 13</Label>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.statutoryEmployee")} />
+                      <Label>Statutory Employee</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.retirementPlan")} />
+                      <Label>Retirement Plan</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox {...register("box13.thirdPartySickPay")} />
+                      <Label>Third-party Sick Pay</Label>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 space-y-6">
+                <h2 className="font-semibold text-lg">State & Local Information</h2>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="stateId">State ID Number</Label>
+                    <Input id="stateId" {...register("stateId")} />
+                  </div>
+                  <div>
+                    <Label htmlFor="stateWages">State Wages</Label>
+                    <Input
+                      id="stateWages"
+                      {...register("stateWages")}
+                      type="number"
+                      step="0.01"
+                    />
                   </div>
                 </div>
               </Card>
