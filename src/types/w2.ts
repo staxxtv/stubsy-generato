@@ -3,9 +3,7 @@ export interface W2FormData {
   // Employee & Employer Info
   employeeSsn: string;
   employerEin: string;
-  employerName: string;
-  employerStreet: string;
-  employerCityStateZip: string;
+  employerInfo: string;
   controlNumber: string;
   employeeFirstName: string;
   employeeLastName: string;
@@ -26,6 +24,7 @@ export interface W2FormData {
     retirementPlan: boolean;
     thirdPartySickPay: boolean;
   };
+  other: string;
   // State Information
   stateId: string;
   stateWages: string;
