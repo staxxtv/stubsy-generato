@@ -1,11 +1,13 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
 
   const navigation = [
     { name: "Paystub Creator", href: "/creator" },
@@ -14,6 +16,16 @@ const Navbar = () => {
     { name: "Pricing", href: "/pricing" },
     { name: "Contact", href: "/contact" },
   ];
+
+  const openLoginModal = () => {
+    setAuthMode("login");
+    setAuthModalOpen(true);
+  };
+
+  const openSignupModal = () => {
+    setAuthMode("signup");
+    setAuthModalOpen(true);
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-lg z-50 border-b border-gray-200">
@@ -36,10 +48,10 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button variant="outline" className="ml-4">
+            <Button variant="outline" className="ml-4" onClick={openLoginModal}>
               Login
             </Button>
-            <Button>Sign Up</Button>
+            <Button onClick={openSignupModal}>Sign Up</Button>
           </div>
 
           {/* Mobile menu button */}
@@ -70,14 +82,36 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="mt-4 space-y-2 px-3">
-              <Button variant="outline" className="w-full">
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={() => {
+                  openLoginModal();
+                  setIsOpen(false);
+                }}
+              >
                 Login
               </Button>
-              <Button className="w-full">Sign Up</Button>
+              <Button 
+                className="w-full"
+                onClick={() => {
+                  openSignupModal();
+                  setIsOpen(false);
+                }}
+              >
+                Sign Up
+              </Button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal 
+        mode={authMode}
+        open={authModalOpen}
+        onOpenChange={setAuthModalOpen}
+      />
     </nav>
   );
 };
