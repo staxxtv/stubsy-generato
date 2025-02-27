@@ -12,14 +12,14 @@ const templates = [
   {
     id: "modern-blue",
     name: "Modern Blue",
-    preview: "/lovable-uploads/bb5e4f6c-fba6-44e9-bd8e-1523fd4d7b5a.png",
+    preview: "/placeholder.svg",
     description: "Clean and professional design with blue accents",
     category: "Featured"
   },
   {
     id: "minimal-dark",
     name: "Minimal Dark",
-    preview: "/lovable-uploads/9fd093fc-9d58-412d-ba4a-c59b43ae8d49.png",
+    preview: "/placeholder.svg",
     description: "Sleek dark theme with white text",
     category: "Modern"
   },
