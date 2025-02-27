@@ -1,122 +1,142 @@
 
-import { Card } from "@/components/ui/card";
-import { calculateTaxes } from "@/utils/taxCalculations";
+import { EmployeeFormData } from "./EmployeeForm";
+import { EarningsFormData } from "./EarningsForm";
+import { PaystubPreviewTemplate } from "./PaystubPreviewTemplates";
+import { cn } from "@/lib/utils";
 
 interface PaystubPreviewProps {
-  employeeData?: {
-    firstName: string;
-    lastName: string;
-    ssnLast4: string;
-    maritalStatus: string;
-    state: string;
-  } | null;
-  earningsData?: {
-    payPeriodStart: string;
-    payPeriodEnd: string;
-    payDate: string;
-    regularHours: number;
-    overtimeHours: number;
-    hourlyRate: number;
-    overtimeRate: number;
-  } | null;
+  employeeData?: EmployeeFormData | null;
+  earningsData?: EarningsFormData | null;
+  templateId?: string;
 }
 
 export const PaystubPreview = ({
   employeeData,
   earningsData,
+  templateId = "modern-blue"
 }: PaystubPreviewProps) => {
   const regularPay = (earningsData?.regularHours || 0) * (earningsData?.hourlyRate || 0);
   const overtimePay = (earningsData?.overtimeHours || 0) * (earningsData?.overtimeRate || 0);
   const grossPay = regularPay + overtimePay;
 
-  const taxes = employeeData
-    ? calculateTaxes(grossPay, employeeData.state, employeeData.maritalStatus)
-    : null;
+  const templateStyles = {
+    "modern-blue": {
+      header: "bg-[#0EA5E9] text-white",
+      section: "border-[#0EA5E9]",
+      table: "bg-gray-50"
+    },
+    "minimal-dark": {
+      header: "bg-[#2D3748] text-white",
+      section: "border-gray-600",
+      table: "bg-[#1A202C]"
+    },
+    "corporate-pro": {
+      header: "bg-[#403E43] text-white",
+      section: "border-[#8A898C]",
+      table: "bg-gray-50"
+    },
+    "tech-startup": {
+      header: "bg-[#8B5CF6] text-white",
+      section: "border-[#C4B5FD]",
+      table: "bg-gray-50"
+    },
+    "gradient-modern": {
+      header: "bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] text-white",
+      section: "border-[#9b87f5]",
+      table: "bg-white bg-opacity-90"
+    },
+    "classic-plus": {
+      header: "bg-[#8E9196] text-white",
+      section: "border-[#C8C8C9]",
+      table: "bg-gray-50"
+    }
+  };
+
+  const styles = templateStyles[templateId as keyof typeof templateStyles];
 
   return (
-    <Card className="p-6 bg-white shadow-sm">
-      <div className="text-center mb-6">
-        <h3 className="text-lg font-bold">Pay Stub Preview</h3>
-        <p className="text-sm text-gray-500">Live preview as you type</p>
+    <PaystubPreviewTemplate templateId={templateId}>
+      {/* Header */}
+      <div className={cn("rounded-t-lg p-4", styles.header)}>
+        <div className="text-2xl font-bold mb-2">
+          {employeeData?.companyName || "Company Name"}
+        </div>
+        <div className="text-sm opacity-90">
+          {employeeData?.companyAddress || "Company Address"}
+        </div>
       </div>
 
-      {employeeData && (
-        <div className="space-y-4 mb-6">
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <p className="font-medium">Employee</p>
-              <p>{`${employeeData.firstName} ${employeeData.lastName}`}</p>
-              <p>SSN: XXX-XX-{employeeData.ssnLast4}</p>
-              <p>Filing Status: {employeeData.maritalStatus}</p>
-            </div>
-            <div>
-              <p className="font-medium">Pay Period</p>
-              {earningsData && (
-                <>
-                  <p>Start: {earningsData.payPeriodStart}</p>
-                  <p>End: {earningsData.payPeriodEnd}</p>
-                  <p>Pay Date: {earningsData.payDate}</p>
-                </>
-              )}
-            </div>
+      {/* Employee Info */}
+      <div className={cn("grid grid-cols-4 gap-4 p-4 border-x border-b", styles.section)}>
+        <div className="col-span-2">
+          <div className="font-bold mb-1">Employee</div>
+          <div className="text-sm">
+            {employeeData ? `${employeeData.firstName} ${employeeData.lastName}` : "Employee Name"}
+            <br />
+            {employeeData?.address || "Employee Address"}
           </div>
         </div>
-      )}
-
-      {earningsData && (
-        <div className="space-y-4">
-          <div className="border-t border-b border-gray-200 py-4">
-            <h4 className="font-medium mb-2">Earnings</h4>
-            <div className="grid grid-cols-4 gap-2 text-sm">
-              <div>Type</div>
-              <div>Hours</div>
-              <div>Rate</div>
-              <div>Amount</div>
-
-              <div>Regular</div>
-              <div>{earningsData.regularHours}</div>
-              <div>${earningsData.hourlyRate}</div>
-              <div>${regularPay.toFixed(2)}</div>
-
-              {earningsData.overtimeHours > 0 && (
-                <>
-                  <div>Overtime</div>
-                  <div>{earningsData.overtimeHours}</div>
-                  <div>${earningsData.overtimeRate}</div>
-                  <div>${overtimePay.toFixed(2)}</div>
-                </>
-              )}
-            </div>
-          </div>
-
-          {taxes && (
-            <div className="border-b border-gray-200 py-4">
-              <h4 className="font-medium mb-2">Deductions</h4>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>Federal Withholding</div>
-                <div>${taxes.federalWithholding.toFixed(2)}</div>
-                <div>State Withholding</div>
-                <div>${taxes.stateWithholding.toFixed(2)}</div>
-                <div>Social Security</div>
-                <div>${taxes.socialSecurity.toFixed(2)}</div>
-                <div>Medicare</div>
-                <div>${taxes.medicare.toFixed(2)}</div>
-              </div>
-            </div>
-          )}
-
-          <div className="pt-4">
-            <div className="grid grid-cols-2 gap-2 text-sm font-medium">
-              <div>Gross Pay</div>
-              <div>${grossPay.toFixed(2)}</div>
-              <div>Total Deductions</div>
-              <div>${(taxes?.totalDeductions || 0).toFixed(2)}</div>
-              <div className="text-base">Net Pay</div>
-              <div className="text-base">${(taxes?.netPay || grossPay).toFixed(2)}</div>
-            </div>
+        <div>
+          <div className="font-bold mb-1">Pay Period</div>
+          <div className="text-sm">
+            {earningsData?.payPeriodStart || "Start Date"}
+            <br />
+            {earningsData?.payPeriodEnd || "End Date"}
           </div>
         </div>
-      )}
-    </Card>
+        <div>
+          <div className="font-bold mb-1">Pay Date</div>
+          <div className="text-sm">{earningsData?.payDate || "Pay Date"}</div>
+        </div>
+      </div>
+
+      {/* Earnings Table */}
+      <div className={cn("p-4 border-x border-b", styles.section)}>
+        <table className="w-full">
+          <thead>
+            <tr className={cn("text-left", styles.table)}>
+              <th className="p-2">Description</th>
+              <th className="p-2">Hours</th>
+              <th className="p-2">Rate</th>
+              <th className="p-2">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="p-2">Regular</td>
+              <td className="p-2">{earningsData?.regularHours || 0}</td>
+              <td className="p-2">${earningsData?.hourlyRate || 0}</td>
+              <td className="p-2">${regularPay.toFixed(2)}</td>
+            </tr>
+            {earningsData?.overtimeHours ? (
+              <tr>
+                <td className="p-2">Overtime</td>
+                <td className="p-2">{earningsData.overtimeHours}</td>
+                <td className="p-2">${earningsData.overtimeRate}</td>
+                <td className="p-2">${overtimePay.toFixed(2)}</td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Summary */}
+      <div className={cn("p-4 rounded-b-lg", styles.table)}>
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <div className="font-bold mb-1">Gross Pay</div>
+            <div>${grossPay.toFixed(2)}</div>
+          </div>
+          <div>
+            <div className="font-bold mb-1">Total Deductions</div>
+            <div>$0.00</div>
+          </div>
+          <div>
+            <div className="font-bold mb-1">Net Pay</div>
+            <div>${grossPay.toFixed(2)}</div>
+          </div>
+        </div>
+      </div>
+    </PaystubPreviewTemplate>
   );
 };
